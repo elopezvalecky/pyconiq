@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: stock-service
+
+eureka:
+  client:
+    enabled: false
