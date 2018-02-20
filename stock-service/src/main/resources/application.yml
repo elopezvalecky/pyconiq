@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: stock-service
+
+server:  
+  port: ${PORT:8091}
+
+eureka:
+    instance:
+        leaseRenewalIntervalInSeconds: 1
+        leaseExpirationDurationInSeconds: 2
+ 
+ribbon:
+    eureka:
+        enabled: true
+

@@ -1,0 +1,168 @@
+swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: "Stock Service"
+  contact:
+    email: "estebanlll@gmail.com"
+basePath: "/api/stocks"
+schemes:
+- "http"
+tags: 
+- name: Stock
+paths:
+  /:
+    post:
+      summary: "Add a new pet to the store"
+      description: ""
+      operationId: "createStock"
+      tags: 
+      - Stock
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Stock object that needs to be added"
+        required: true
+        schema:
+          type: object
+          properties:
+            name:
+              type: string
+            price:
+              type: number
+          required: 
+          - name
+          - price
+      responses:
+        303:
+          description: "Stock created"
+        405:
+          description: "Invalid input"
+    get:
+      summary: "Retrive the stock list"
+      description: ""
+      operationId: "listStocks"
+      tags: 
+      - Stock
+      consumes:
+      - "application/json"
+      responses:
+        200:
+          description: "List of Stocks found"
+          schema:
+            $ref: '#/definitions/StockList'
+  /{id}:
+    get:
+      summary: "Retrive an existing stock"
+      description: ""
+      operationId: "retrieveStock"
+      tags: 
+      - Stock
+      consumes:
+      - "application/json"
+      parameters: 
+      - in: path
+        name: id
+        description: "The id of the stock"
+        required: true
+        type: number
+      responses:
+        200:
+          description: "Stock found"
+          schema:
+            $ref: '#/definitions/Stock'
+        404:
+          description: "Stock not found"
+          schema:
+            $ref: '#/definitions/Error'
+    put:
+      summary: "Update an existing stock"
+      description: ""
+      operationId: "updateStock"
+      tags: 
+      - Stock
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters: 
+      - in: path
+        name: id
+        description: "The id of the stock"
+        required: true
+        type: number
+      - in: "body"
+        name: "body"
+        description: "Stock object that needs to be added"
+        required: true
+        schema:
+          type: object
+          properties:
+            price:
+              type: number
+          required: 
+          - price
+      responses:
+        204:
+          description: "Stock updated"
+          schema:
+            $ref: '#/definitions/Stock'
+        400:
+          description: "Invalid parameters"
+          schema:
+            $ref: '#/definitions/Error'
+        404:
+          description: "Stock not found"
+          schema:
+            $ref: '#/definitions/Error'
+    delete:
+      summary: "Delete an existing stock"
+      description: ""
+      operationId: "deleteStock"
+      tags: 
+      - Stock
+      parameters: 
+      - in: path
+        name: id
+        description: "The id of the stock"
+        required: true
+        type: number
+      responses:
+        204:
+          description: "Stock deleted"
+        404:
+          description: "Stock not found"
+          schema:
+            $ref: '#/definitions/Error'      
+definitions:
+  StockList:
+    type: object
+    properties:
+      data:
+        type: array
+        items:
+          $ref: '#/definitions/Stock'
+      count:
+        type: number
+  Stock:
+    type: object
+    properties:
+      id:
+        type: number
+      name:
+        type: string
+      currentPrice:
+        type: number
+      lastUpdate:
+        type: string
+        format: datetime
+  Error:
+    type: object
+    properties:
+      message:
+        type: string
+      code:
+        type: number

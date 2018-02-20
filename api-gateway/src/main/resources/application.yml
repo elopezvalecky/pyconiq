@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: api-gateway
+
+server:  
+  port: ${PORT:8080}
+
+zuul:
+    prefix: /api
+    routes:
+        stockService:
+            path: /stocks/**
+            serviceId: stock-service
+
