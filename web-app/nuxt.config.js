@@ -1,10 +1,14 @@
-const port = process.env.PORT || process.env.npm_package_config_nuxt_port || '3000'
-const host = process.env.HOST || process.env.npm_package_config_nuxt_host || 'localhost'
+const port = process.env.PORT || process.env.npm_package_config_nuxt_port
+		|| '3000'
+const host = process.env.HOST || process.env.npm_package_config_nuxt_host
+		|| 'localhost'
 
 module.exports = {
 	srcDir : 'src/',
-	env: {
-	    baseUrl: process.env.BASE_URL || `http://${host}:${port}`
+	env : {
+		dev : (process.env.NODE_ENV !== 'production'),
+		baseUrl : process.env.BASE_URL || `http://${host}:${port}`,
+		apiUrl : process.env.API_URL || `http://${host}:8080`
 	},
 	// Headers of the page
 	head : {

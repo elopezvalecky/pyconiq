@@ -45,17 +45,17 @@
 </template>
 
 <script>
-import axios from 'axios'
+import API from '~/plugins/api'
 
 export default {
   asyncData({ params }) {
-    return axios.get(`http://localhost:8080/api/stocks/${params.id}`)
+    return API.get(`/api/stocks/${params.id}`)
             .then((result) => { return result.data })
   },
   methods: {
     saveStock: function () {
       var self = this
-      axios.put(`http://localhost:8080/api/stocks/${this.id}`, { currentPrice: this.currentPrice })
+      API.put(`/api/stocks/${this.id}`, { currentPrice: this.currentPrice })
           .then((result) => { this.$router.push('/stocks') })
     }
   }  

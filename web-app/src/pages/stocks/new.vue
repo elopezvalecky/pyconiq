@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import API from '~/plugins/api'
 
 export default {
   data: function () {
@@ -44,7 +44,7 @@ export default {
   },
   methods: {
     saveStock: function () {
-      axios.post('http://localhost:8080/api/stocks', { name: this.name, currentPrice: this.price })
+      API.post('/api/stocks', { name: this.name, currentPrice: this.price })
           .then((result) => { this.$router.push('/stocks') })
     }
   }  

@@ -45,13 +45,13 @@
 </template>
 
 <script>
-import axios from 'axios'
+import API from '~/plugins/api'
 import moment from 'moment'
 
 export default {
 
-  asyncData() {
-    return axios.get('http://localhost:8080/api/stocks?size=100')
+  asyncData({ env }) {
+    return API.get('/api/stocks?size=100')
         .then((result) => { return result.data })
   },
 
@@ -63,7 +63,7 @@ export default {
         this.$router.push({ name: 'stocks-id-edit', params: { id }})
     },
     removeStock(id) {
-      axios.delete(`http://localhost:8080/api/stocks/${id}`)
+      API.delete(`/api/stocks/${id}`)
           .then((result) => { window.location.reload() })
     }
   }

@@ -47,12 +47,12 @@
 </template>
 
 <script>
-import axios from 'axios'
+import API from '~/plugins/api'
 import moment from 'moment'
 
 export default {
   asyncData({ params }) {
-    return axios.get(`http://localhost:8080/api/stocks/${params.id}`)
+    return API.get(`/api/stocks/${params.id}`)
             .then((result) => { return result.data })
   },
   computed: {
