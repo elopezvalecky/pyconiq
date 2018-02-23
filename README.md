@@ -1,4 +1,4 @@
-# Payconiq Assessment
+# Payconiq Assignment
 
 
 ## Goal 
